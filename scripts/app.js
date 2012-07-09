@@ -1,5 +1,4 @@
-﻿
-// Next two lines for JS-Lint, first a pragma instruction, then global vars specified
+﻿// Next two lines for JS-Lint, first a pragma instruction, then global vars specified
 "use strict";
 var $, iScroll, window, google;
 
@@ -25,7 +24,7 @@ RocknCoder.Pages.Events = (function () {
 
 RocknCoder.Dimensions = (function () {
 	var width, height, headerHeight, footerHeight, contentHeight,
-		getDimensions = function () {
+		getContent = function () {
 			return {
 				width: width,
 				height: contentHeight
@@ -40,12 +39,14 @@ RocknCoder.Dimensions = (function () {
 		};
 	return {
 		init: init,
-		getDimensions: getDimensions
+		getContent: getContent
 	};
 }());
 
 RocknCoder.Pages.page1 = (function () {
-	var map, latLong = new google.maps.LatLng(34.0522, -118.2428),
+	var map,
+		// ladies and gentlemen, welcome to Los Angeles, California
+		latLong = new google.maps.LatLng(34.0522, -118.2428),
 		mapElement = $("#map").get(0),
 		options  = {
 			center: latLong,
@@ -56,10 +57,9 @@ RocknCoder.Pages.page1 = (function () {
 		pageshow = function () {
 			// we need to wait until jQuery Mobile is ready and has rendered
 			RocknCoder.Dimensions.init();
-			var dim = RocknCoder.Dimensions.getDimensions();
+			var dim = RocknCoder.Dimensions.getContent();
 			// set the CSS height dynamically
 			$("#map").css('height', dim.height);
-			// ladies and gentlemen, welcome to Los Angeles, California
 			map = new google.maps.Map(mapElement, options);
 		};
 	return {

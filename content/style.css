@@ -1,13 +1,6 @@
-
-/* allow the map to go from edge to edge */
-section[data-role="content"] {
+#map {
 	padding: 0;
 	margin: 0;
+	width: 100%; /* this isn't really necessary, but let's be clear */
+	height: 240px; /* this will be set dynamically later */
 }
-
-/* set the map dimensions, height is set dynamically via JS */
-#map {
-	width: 100%;
-	height: 240px;
-}
-
