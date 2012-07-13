@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>app.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,128,0); font-weight: bold; }
+.s3 { color: rgb(0,0,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+app.js</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<a name="l1"><span class="s0">// Next two lines for JS-Lint, first a pragma instruction, then global vars specified</span><span class="s1"> 
+<a name="l2"></span><span class="s2">&quot;use strict&quot;</span><span class="s1">; 
+<a name="l3"></span><span class="s3">var </span><span class="s1">$, iScroll, window, google; 
+<a name="l4"> 
+<a name="l5"></span><span class="s0">// create our own namespace</span><span class="s1"> 
+<a name="l6"></span><span class="s3">var </span><span class="s1">RocknCoder = RocknCoder || {}; 
+<a name="l7">RocknCoder.Pages = RocknCoder.Pages || {}; 
+<a name="l8"> 
+<a name="l9">RocknCoder.Pages.Kernel = </span><span class="s3">function </span><span class="s1">(event) { 
+<a name="l10">    </span><span class="s3">var </span><span class="s1">that = </span><span class="s3">this</span><span class="s1">, 
+<a name="l11">        eventType = event.type, 
+<a name="l12">        pageName = $(</span><span class="s3">this</span><span class="s1">).attr(</span><span class="s2">&quot;data-rockncoder-jspage&quot;</span><span class="s1">); 
+<a name="l13">    </span><span class="s3">if </span><span class="s1">(RocknCoder &amp;&amp; RocknCoder.Pages &amp;&amp; pageName &amp;&amp; RocknCoder.Pages[pageName] &amp;&amp; RocknCoder.Pages[pageName][eventType]) { 
+<a name="l14">        RocknCoder.Pages[pageName][eventType].call(that); 
+<a name="l15">    } 
+<a name="l16">}; 
+<a name="l17"> 
+<a name="l18">RocknCoder.Pages.Events = (</span><span class="s3">function </span><span class="s1">() { 
+<a name="l19">    $(</span><span class="s2">&quot;div[data-rockncoder-jspage]&quot;</span><span class="s1">).on( 
+<a name="l20">        </span><span class="s2">'pagebeforecreate pagecreate pagebeforeload pagebeforeshow pageshow pagebeforechange pagechange pagebeforehide pagehide pageinit'</span><span class="s1">, 
+<a name="l21">        RocknCoder.Pages.Kernel 
+<a name="l22">    ); 
+<a name="l23">}()); 
+<a name="l24"> 
+<a name="l25">RocknCoder.Dimensions = (</span><span class="s3">function </span><span class="s1">() { 
+<a name="l26">    </span><span class="s3">var </span><span class="s1">width, height, headerHeight, footerHeight, contentHeight, 
+<a name="l27">        getContent = </span><span class="s3">function </span><span class="s1">() { 
+<a name="l28">            </span><span class="s3">return </span><span class="s1">{ 
+<a name="l29">                width: width, 
+<a name="l30">                height: contentHeight 
+<a name="l31">            }; 
+<a name="l32">        }, 
+<a name="l33">        init = </span><span class="s3">function </span><span class="s1">() { 
+<a name="l34">            width = $(window).width(); 
+<a name="l35">            height = $(window).height(); 
+<a name="l36">            headerHeight = $(</span><span class="s2">&quot;header&quot;</span><span class="s1">, $.mobile.activePage).height(); 
+<a name="l37">            footerHeight = $(</span><span class="s2">&quot;footer&quot;</span><span class="s1">, $.mobile.activePage).height(); 
+<a name="l38">            contentHeight = height - headerHeight - footerHeight; 
+<a name="l39">        }; 
+<a name="l40">    </span><span class="s3">return </span><span class="s1">{ 
+<a name="l41">        init: init, 
+<a name="l42">        getContent: getContent 
+<a name="l43">    }; 
+<a name="l44">}()); 
+<a name="l45"> 
+<a name="l46">RocknCoder.Pages.page1 = (</span><span class="s3">function </span><span class="s1">() { 
+<a name="l47">    </span><span class="s3">var </span><span class="s1">map, 
+<a name="l48">        </span><span class="s0">// ladies and gentlemen, welcome to Los Angeles, California</span><span class="s1"> 
+<a name="l49">        latLong = </span><span class="s3">new </span><span class="s1">google.maps.LatLng(</span><span class="s4">34.0522</span><span class="s1">, -</span><span class="s4">118.2428</span><span class="s1">), 
+<a name="l50">        mapElement = $(</span><span class="s2">&quot;#map&quot;</span><span class="s1">).get(</span><span class="s4">0</span><span class="s1">), 
+<a name="l51">        options  = { 
+<a name="l52">            center: latLong, 
+<a name="l53">            zoom: </span><span class="s4">16</span><span class="s1">, 
+<a name="l54">            mapTypeId: google.maps.MapTypeId.ROADMAP 
+<a name="l55">        }, 
+<a name="l56">        </span><span class="s0">// event handler for the jQuery Mobile pageshow event</span><span class="s1"> 
+<a name="l57">        pageshow = </span><span class="s3">function </span><span class="s1">() { 
+<a name="l58">            </span><span class="s0">// we need to wait until jQuery Mobile is ready and has rendered</span><span class="s1"> 
+<a name="l59">            RocknCoder.Dimensions.init(); 
+<a name="l60">            </span><span class="s3">var </span><span class="s1">dim = RocknCoder.Dimensions.getContent(); 
+<a name="l61">            </span><span class="s0">// set the CSS height dynamically</span><span class="s1"> 
+<a name="l62">            $(</span><span class="s2">&quot;#map&quot;</span><span class="s1">).css(</span><span class="s2">'height'</span><span class="s1">, dim.height); 
+<a name="l63">            map = </span><span class="s3">new </span><span class="s1">google.maps.Map(mapElement, options); 
+<a name="l64">        }; 
+<a name="l65">    </span><span class="s3">return </span><span class="s1">{ 
+<a name="l66">        pageshow: pageshow 
+<a name="l67">    }; 
+<a name="l68">}());</span></pre>
+</body>
+</html>
